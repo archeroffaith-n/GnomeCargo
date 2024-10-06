@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bsxgnhc5txk3w"]
+
+[resource]
+resource_name = "InnerEgje"
+cull_mode = 2
+albedo_color = Color(0.71, 0.621013, 0.3763, 1)

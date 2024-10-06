@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dok8pddv0m8hw"]
+
+[resource]
+resource_name = "Leaves"
+cull_mode = 2
+albedo_color = Color(0.392667, 0.8, 0.28, 1)

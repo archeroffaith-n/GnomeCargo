@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b0u05vupbma2d"]
+
+[resource]
+resource_name = "Fence"
+cull_mode = 2
+albedo_color = Color(0.74, 0.67118, 0.5106, 1)

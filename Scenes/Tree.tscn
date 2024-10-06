@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://xyf7xwqgnj67"]
+
+[ext_resource type="PackedScene" uid="uid://oi82qscpdva4" path="res://Assets/ExternalModels/Tree.dae" id="1_7pla8"]
+[ext_resource type="Script" path="res://Scripts/FallDestroy.gd" id="1_ewhbt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tanw5"]
+height = 2.54198
+radius = 0.484834
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cpuby"]
+height = 2.33867
+radius = 1.79272
+
+[node name="Tree" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 500.0
+script = ExtResource("1_ewhbt")
+
+[node name="Tree" parent="RigidBody3D" instance=ExtResource("1_7pla8")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1.1959, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26595, 0)
+shape = SubResource("CylinderShape3D_tanw5")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.43995, 0)
+shape = SubResource("CylinderShape3D_cpuby")

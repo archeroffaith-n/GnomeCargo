@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://caakvl8tvlclq"]
+
+[ext_resource type="PackedScene" uid="uid://b6j70qc5r1gxs" path="res://Assets/ExternalModels/Gnome.dae" id="1_28e4f"]
+[ext_resource type="Script" path="res://Scripts/Gnome.gd" id="1_rfech"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_87b2j"]
+radius = 0.246581
+height = 1.30442
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2rcgf"]
+radius = 0.15
+
+[node name="Gnome" type="Node3D"]
+
+[node name="Gnome" type="RigidBody3D" parent="."]
+collision_mask = 3
+mass = 10.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.1, 0)
+angular_damp = 2.0
+script = ExtResource("1_rfech")
+
+[node name="Body" parent="Gnome" instance=ExtResource("1_28e4f")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gnome"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64827, -0.0193073)
+shape = SubResource("CapsuleShape3D_87b2j")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Gnome/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.516933, -0.00754138)
+shape = SubResource("SphereShape3D_2rcgf")
+target_position = Vector3(0, 0, 0)

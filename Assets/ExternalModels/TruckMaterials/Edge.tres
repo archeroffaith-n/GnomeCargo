@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cpc6iq8ffbpcb"]
+
+[resource]
+resource_name = "Edge"
+cull_mode = 2
+albedo_color = Color(0.82, 0.82, 0.82, 1)

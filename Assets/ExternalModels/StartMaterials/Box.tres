@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dxtmjfbs6ia2f"]
+
+[resource]
+resource_name = "Box"
+cull_mode = 2
+albedo_color = Color(0.83, 0.738285, 0.5063, 1)

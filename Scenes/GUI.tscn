@@ -1,0 +1,69 @@
+[gd_scene load_steps=3 format=3 uid="uid://b41d1i2c56ry3"]
+
+[ext_resource type="FontFile" uid="uid://cswwb6g0ylptx" path="res://Assets/Fonts/berlinsansfb_reg.ttf" id="1_1i0oc"]
+[ext_resource type="Script" path="res://Scripts/GUI.gd" id="1_p8j8v"]
+
+[node name="GUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p8j8v")
+
+[node name="Money" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -313.0
+offset_top = 28.0
+offset_right = -46.0
+offset_bottom = 116.0
+grow_horizontal = 0
+pivot_offset = Vector2(267, 88)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_1i0oc")
+theme_override_font_sizes/font_size = 70
+text = "100$"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="PotentialMoney" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -241.0
+offset_top = 89.0
+offset_right = -46.0
+offset_bottom = 177.0
+grow_horizontal = 0
+pivot_offset = Vector2(195, 88)
+theme_override_colors/font_color = Color(0.96, 0.96, 0.96, 1)
+theme_override_fonts/font = ExtResource("1_1i0oc")
+theme_override_font_sizes/font_size = 50
+text = "+10$"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Tip" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -133.5
+offset_top = -112.0
+offset_right = 133.5
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_1i0oc")
+theme_override_font_sizes/font_size = 23
+text = "Use WASD to control truck"
+horizontal_alignment = 1
+vertical_alignment = 1

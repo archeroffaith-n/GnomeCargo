@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://om331glfonx8"]
+
+[ext_resource type="PackedScene" uid="uid://darimnps2d8sa" path="res://Assets/ExternalModels/Fence.dae" id="1_viqgw"]
+[ext_resource type="Script" path="res://Scripts/FallDestroy.gd" id="1_xmcwl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_22g1c"]
+size = Vector3(2.24078, 1.30838, 0.116177)
+
+[node name="Fence" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 10.0
+script = ExtResource("1_xmcwl")
+
+[node name="FenceMesh" parent="RigidBody3D" instance=ExtResource("1_viqgw")]
+transform = Transform3D(2.53612, 0, 0, 0, 2.53612, 0, 0, 0, 2.53612, -0.826344, 0.25087, 0.165654)
+
+[node name="FenceBorder" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101013, 0.662857, -0.00502968)
+shape = SubResource("BoxShape3D_22g1c")

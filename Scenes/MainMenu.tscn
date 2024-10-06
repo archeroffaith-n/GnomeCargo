@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://dy5sq2j2xkl6h"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_mwbdu"]
+[ext_resource type="Texture2D" uid="uid://dngf5quxe4b5d" path="res://Assets/Textures/MainMenu.png" id="1_t68n3"]
+[ext_resource type="FontFile" uid="uid://cswwb6g0ylptx" path="res://Assets/Fonts/berlinsansfb_reg.ttf" id="2_ucoeb"]
+[ext_resource type="AudioStream" uid="uid://3bxq5qphu1k5" path="res://Assets/Sounds/MainMenuMusic.mp3" id="4_gt2hm"]
+[ext_resource type="AudioStream" uid="uid://couge0uh187e" path="res://Assets/Sounds/MenuButtonClick.mp3" id="5_e840q"]
+
+[sub_resource type="Theme" id="Theme_ag3ve"]
+default_font = ExtResource("2_ucoeb")
+default_font_size = 43
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mwbdu")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_t68n3")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 156.0
+offset_top = 360.0
+offset_right = -797.0
+offset_bottom = -214.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ag3ve")
+theme_override_colors/font_color = Color(0.288518, 0.288518, 0.288518, 1)
+text = "PLAY"
+flat = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gt2hm")
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_e840q")

@@ -1,0 +1,164 @@
+[gd_scene load_steps=16 format=3 uid="uid://bq60mqx1hoh81"]
+
+[ext_resource type="PackedScene" uid="uid://csrgncmmmx6vi" path="res://Assets/ExternalModels/Truck.dae" id="1_geuqh"]
+[ext_resource type="Script" path="res://Scripts/TruckBody.gd" id="1_rtdpp"]
+[ext_resource type="PackedScene" uid="uid://dd4np6ep0ls0" path="res://Assets/ExternalModels/Wheel.dae" id="2_v4dae"]
+[ext_resource type="Script" path="res://Scripts/TruckBase.gd" id="3_phy8e"]
+[ext_resource type="Script" path="res://Scripts/Honk.gd" id="5_v4kx8"]
+[ext_resource type="Script" path="res://Scripts/CatchArea.gd" id="6_rxjmy"]
+[ext_resource type="AudioStream" uid="uid://di2wxhcp06nk3" path="res://Assets/Sounds/EngineRunning.mp3" id="6_tawbj"]
+[ext_resource type="PackedScene" uid="uid://di4deykvw16e2" path="res://Assets/ExternalModels/Arrow.dae" id="7_8o7j7"]
+[ext_resource type="AudioStream" uid="uid://b13s6n0d6gdo3" path="res://Assets/Sounds/Horn.mp3" id="7_aqf8r"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_807kg"]
+radius = 0.769363
+height = 3.13293
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f8pty"]
+height = 0.2
+radius = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3c555"]
+radius = 0.291179
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_thig3"]
+radius = 0.646974
+height = 2.89845
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vbr2a"]
+height = 4.05029
+radius = 4.06102
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wxh3y"]
+height = 1.12485
+radius = 0.3
+
+[node name="Truck" type="Node3D"]
+
+[node name="TruckBody" type="RigidBody3D" parent="." node_paths=PackedStringArray("anchor", "targetPosition", "attachPosition", "trickBody")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+collision_layer = 2
+script = ExtResource("1_rtdpp")
+anchor = NodePath("../TruckBase")
+targetPosition = NodePath("../TruckBase/BodyTargetPoint")
+attachPosition = NodePath("../TruckBase/BodyAttachPoint")
+trickBody = NodePath("TrickBody")
+linearFrequency = 0.7
+angularFrequency = 0.3
+thirdDamping = 0.3
+minDistFrac = 0.95
+maxDistFrac = 1.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TruckBody"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.755141, 0)
+shape = SubResource("CapsuleShape3D_807kg")
+
+[node name="TrickBody" type="Node3D" parent="TruckBody"]
+
+[node name="Body" parent="TruckBody/TrickBody" instance=ExtResource("1_geuqh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+
+[node name="TruckBase" type="RigidBody3D" parent="." node_paths=PackedStringArray("shapeCasts", "frontWheels")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.697245)
+collision_layer = 2
+mass = 1000.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0, -0.7)
+script = ExtResource("3_phy8e")
+shapeCasts = [NodePath("ShapeCastFR"), NodePath("ShapeCastFL"), NodePath("ShapeCastBR"), NodePath("ShapeCastBL")]
+maxDistanceToFloor = 0.25
+criticalSlope = 60.0
+frontWheels = [NodePath("WheelFR"), NodePath("WheelFL"), NodePath("WheelColliderFR"), NodePath("WheelColliderFL")]
+
+[node name="WheelFR" parent="TruckBase" instance=ExtResource("2_v4dae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.648735, 0, -1.57655)
+
+[node name="WheelFL" parent="TruckBase" instance=ExtResource("2_v4dae")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.649, 0, -1.57607)
+
+[node name="WheelBR" parent="TruckBase" instance=ExtResource("2_v4dae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.677156, 0, 0.220634)
+
+[node name="WheelBL" parent="TruckBase" instance=ExtResource("2_v4dae")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.677, 0, 0.220935)
+
+[node name="ShapeCastFR" type="ShapeCast3D" parent="TruckBase"]
+transform = Transform3D(-4.37114e-08, -1, 8.35189e-23, 1, -4.37114e-08, 3.59989e-21, -2.75286e-21, -1.67038e-22, 1, 0.641788, 0.251989, -1.57823)
+shape = SubResource("CylinderShape3D_f8pty")
+target_position = Vector3(0, 0, 0)
+
+[node name="ShapeCastFL" type="ShapeCast3D" parent="TruckBase"]
+transform = Transform3D(4.37114e-08, 1, -8.74226e-08, 1, -4.37114e-08, -9.31736e-21, -3.82137e-15, -8.74226e-08, -1, -0.648394, 0.251989, -1.56303)
+shape = SubResource("CylinderShape3D_f8pty")
+target_position = Vector3(0, 0, 0)
+
+[node name="ShapeCastBR" type="ShapeCast3D" parent="TruckBase"]
+transform = Transform3D(-4.37114e-08, -1, 8.35185e-23, 1, -4.37114e-08, -6.35275e-21, -2.75286e-21, -1.67038e-22, 1, 0.662403, 0.251989, 0.220412)
+shape = SubResource("CylinderShape3D_f8pty")
+target_position = Vector3(0, 0, 0)
+
+[node name="ShapeCastBL" type="ShapeCast3D" parent="TruckBase"]
+transform = Transform3D(4.37114e-08, 1, -8.74226e-08, 1, -4.37114e-08, -9.31736e-21, -3.82137e-15, -8.74226e-08, -1, -0.675695, 0.251989, 0.221711)
+shape = SubResource("CylinderShape3D_f8pty")
+target_position = Vector3(0, 0, 0)
+
+[node name="WheelColliderFR" type="CollisionShape3D" parent="TruckBase"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.537352, 0.299695, -1.59849)
+shape = SubResource("SphereShape3D_3c555")
+
+[node name="WheelColliderFL" type="CollisionShape3D" parent="TruckBase"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -0.544637, 0.299695, -1.59849)
+shape = SubResource("SphereShape3D_3c555")
+
+[node name="WheelColliderBR" type="CollisionShape3D" parent="TruckBase"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 0.571304, 0.299695, 0.22947)
+shape = SubResource("SphereShape3D_3c555")
+
+[node name="WheelColliderBL" type="CollisionShape3D" parent="TruckBase"]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -0.565695, 0.299695, 0.231804)
+shape = SubResource("SphereShape3D_3c555")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TruckBase"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.22337, -0.724807)
+shape = SubResource("CapsuleShape3D_thig3")
+
+[node name="BodyTargetPoint" type="Node3D" parent="TruckBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54505, -0.663065)
+
+[node name="BodyAttachPoint" type="Node3D" parent="TruckBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.663)
+
+[node name="HonkAttachPoint" type="Node3D" parent="TruckBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50944, -2.28791)
+
+[node name="CatchAttachPoint" type="Node3D" parent="TruckBase"]
+
+[node name="Arrow" type="Node3D" parent="TruckBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.697245)
+
+[node name="Arrow" parent="TruckBase/Arrow" instance=ExtResource("7_8o7j7")]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.578855, -2.21039)
+
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="TruckBase"]
+stream = ExtResource("6_tawbj")
+volume_db = -4.359
+
+[node name="HonkArea" type="Area3D" parent="." node_paths=PackedStringArray("point")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.642239, -1.57302)
+script = ExtResource("5_v4kx8")
+point = NodePath("../TruckBase/HonkAttachPoint")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HonkArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.724, 0)
+shape = SubResource("CylinderShape3D_vbr2a")
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="HonkArea"]
+stream = ExtResource("7_aqf8r")
+
+[node name="CatchArea" type="Area3D" parent="." node_paths=PackedStringArray("point")]
+script = ExtResource("6_rxjmy")
+point = NodePath("../TruckBase/CatchAttachPoint")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CatchArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.13935, 0.392222)
+shape = SubResource("CylinderShape3D_wxh3y")

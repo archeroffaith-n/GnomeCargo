@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccga3la8mn6oh"]
+
+[ext_resource type="PackedScene" uid="uid://b6req2h65wx8p" path="res://Assets/ExternalModels/Start.dae" id="1_b1w2y"]
+[ext_resource type="Script" path="res://Scripts/FinishRing.gd" id="2_s1ih5"]
+[ext_resource type="Material" uid="uid://ualg3e60neb" path="res://Assets/ExternalModels/StartMaterials/Start.tres" id="3_lhfr3"]
+[ext_resource type="ArrayMesh" uid="uid://bgb7flmuywxw6" path="res://Assets/ExternalModels/Finish.obj" id="4_cfr05"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xhyfw"]
+height = 1.0
+radius = 0.752519
+
+[node name="Start" type="Node3D"]
+
+[node name="Boxes" parent="." instance=ExtResource("1_b1w2y")]
+transform = Transform3D(0.62, 0, 0, 0, 0.62, 0, 0, 0, 0.62, -0.314561, 0, -0.339026)
+
+[node name="StartRing" type="Node3D" parent="."]
+script = ExtResource("2_s1ih5")
+rotationSpeed = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StartRing"]
+transform = Transform3D(0.996267, -0.0863211, 0, 0.0863211, 0.996267, 0, 0, 0, 1, 0, 0.715978, 0)
+material_override = ExtResource("3_lhfr3")
+cast_shadow = 0
+mesh = ExtResource("4_cfr05")
+skeleton = NodePath("../..")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_xhyfw")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8t3yroa2ais0"]
+
+[ext_resource type="Script" path="res://Scripts/FinishRing.gd" id="1_1b823"]
+[ext_resource type="ArrayMesh" uid="uid://bgb7flmuywxw6" path="res://Assets/ExternalModels/Finish.obj" id="1_igw55"]
+[ext_resource type="Material" uid="uid://x6hfq670j2gs" path="res://Assets/ExternalModels/FinishMaterials/Finish.tres" id="2_r80d1"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pu6d3"]
+height = 1.0
+radius = 2.72293
+
+[node name="Finish" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_pu6d3")
+
+[node name="FinishRing" type="Node3D" parent="."]
+script = ExtResource("1_1b823")
+rotationSpeed = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="FinishRing"]
+transform = Transform3D(0.996267, -0.0863211, 0, 0.0863211, 0.996267, 0, 0, 0, 1, 0, 0.715978, 0)
+material_override = ExtResource("2_r80d1")
+cast_shadow = 0
+mesh = ExtResource("1_igw55")
+skeleton = NodePath("../..")

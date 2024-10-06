@@ -1,0 +1,5 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cu6ro0im8swa3"]
+
+[resource]
+resource_name = "Arrow"
+cull_mode = 2

@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://caakvl8tvlclq"]
+
+[ext_resource type="PackedScene" uid="uid://b6j70qc5r1gxs" path="res://Assets/ExternalModels/Gnome.dae" id="1_28e4f"]
+[ext_resource type="Script" path="res://Scripts/Gnome.gd" id="1_rfech"]
+[ext_resource type="AudioStream" uid="uid://k4u1b1uv6tq6" path="res://Assets/Sounds/GnomeJump.mp3" id="3_wkrbx"]
+[ext_resource type="AudioStream" uid="uid://cyllukd8s6ol2" path="res://Assets/Sounds/HardHit.mp3" id="4_ydo1r"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2rcgf"]
+radius = 0.15
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_87b2j"]
+radius = 0.246581
+height = 1.30442
+
+[node name="Gnome" type="Node3D"]
+
+[node name="Gnome" type="RigidBody3D" parent="." node_paths=PackedStringArray("shapeCast")]
+collision_mask = 3
+mass = 10.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -0.1, 0)
+angular_damp = 2.0
+script = ExtResource("1_rfech")
+shapeCast = NodePath("ShapeCast3D")
+
+[node name="Body" parent="Gnome" instance=ExtResource("1_28e4f")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 0, 0)
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Gnome"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.131337, -0.0268487)
+shape = SubResource("SphereShape3D_2rcgf")
+target_position = Vector3(0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gnome"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64827, -0.0193073)
+shape = SubResource("CapsuleShape3D_87b2j")
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="Gnome"]
+stream = ExtResource("3_wkrbx")
+
+[node name="HardHit" type="AudioStreamPlayer3D" parent="Gnome"]
+visible = false
+stream = ExtResource("4_ydo1r")
